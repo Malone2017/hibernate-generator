@@ -24,8 +24,13 @@ public class TableController extends BaseController{
 	
 	@Override
 	public String generator() {
+		Object tableName = request.getParameter("tableName");
+		
+		if(tableName == null){
+			return "请输入表名";
+		}
 		Map<String,String> paramMap = new HashMap<>();
-		paramMap.put("tableName", request.getParameter("tableName"));
+		paramMap.put("tableName", tableName.toString());
 		return tableService.generator(paramMap);
 	}
 

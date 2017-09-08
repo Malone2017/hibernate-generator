@@ -21,7 +21,6 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		logger.info("Hello World!");
 		SpringApplication.run(Application.class, args);
 	}
 }
