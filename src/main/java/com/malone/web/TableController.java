@@ -27,6 +27,7 @@ public class TableController extends BaseController{
 		Object tableName = request.getParameter("tableName");
 		
 		if(tableName == null){
+			logger.error("请输入表名");
 			return "请输入表名";
 		}
 		Map<String,String> paramMap = new HashMap<>();
