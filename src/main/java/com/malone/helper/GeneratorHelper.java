@@ -4,7 +4,7 @@ import org.springframework.util.StringUtils;
 
 
 public class GeneratorHelper {
-	public static final String  LINE_BREAK = "<br/>";
+	public static final String  LINE_BREAK = "\n";
 	
 	public static String columnToField(String column){
 		if(!StringUtils.isEmpty(column)){
@@ -90,13 +90,13 @@ public class GeneratorHelper {
 		String className = tempClassName.substring(0,1).toUpperCase().concat(tempClassName.substring(1));
 		sb.append("public class " + className);
 		sb.append("{");
-		sb.append("<br/>");
+		sb.append(LINE_BREAK);
 		sb.append("public static final String TABLE_NAME = \"" + tableName.toUpperCase() + "\"");
 		sb.append(";");
-		sb.append("<br/>");
+		sb.append(LINE_BREAK);
 		sb.append(fields);
 		sb.append("}");
-		sb.append("<br/>");
+		sb.append(LINE_BREAK);
 		
 		return sb.toString();
 	}

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,20 +30,27 @@
 </head>
 <body>
 	<h1>你好，世界！</h1>
-	<div>
+	<div id="entity" class="j_div">
 		<form class="form-inline">
-			<div class="form-group">
-				<label for="exampleInputName2">表名：</label> <input type="text"
-					class="form-control" id="J_input" placeholder="">
-			</div>
-			<button type="button" class="btn btn-default" id="J_button">生成</button>
 			<button data-clipboard-target="#content" class="btn btn-default"
 				id="J_copy" type="button">复制代码</button>
 		</form>
-
-
-		<div id="content"></div>
-
+		<pre>
+			<code class="java">
+				<div id="content">${entity }</div>
+			</code>
+		</pre>
+	</div>
+	<div id="mapping" style="display: none;" class="j_div">
+		<form class="form-inline">
+			<button data-clipboard-target="#content2" class="btn btn-default"
+				id="J_copy_2" type="button">复制代码</button>
+		</form>
+		<pre>
+			<code class="java">
+				<div id="content2">${mapping }</div>
+			</code>
+		</pre>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -52,32 +61,16 @@
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
 
-	<script src="clipboard.js"></script>
+	<script src="/clipboard.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
+			
 			hljs.initHighlightingOnLoad();
 			new Clipboard('#J_copy');
-			$("#J_button").off("click").on("click", function() {
-				var tableName = $("#J_input").val();
-				$.ajax({
-					url : "/table/generator",
-					data : {
-						tableName : tableName
-					},
-					dataType : "html",
-					method : "get",
-					success : function(html) {
-						var temp = [];
-						temp.push("<pre>");
-						temp.push('<code class="java">');
-						temp.push(html);
-						temp.push('</code>');										
-						temp.push('</pre>');
-						$("#content").html(temp.join(""));
-						
-					}
-				})
+			new Clipboard('#J_copy_2');
+			$(".j_div").off("click").on("click",function(){
+				$(this).show().siblings().hide();
 			});
 		})
 	</script>

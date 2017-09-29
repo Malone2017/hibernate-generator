@@ -13,24 +13,27 @@ import com.malone.service.TableService;
 
 @RestController
 @RequestMapping("/table")
-public class TableController extends BaseController{
+public class TableController extends BaseController {
 	private static Logger logger = Logger.getLogger(TableController.class);
-	@Autowired
+	
+	@Autowired()
 	private TableService tableService;
+
 	@Override
 	public List<Map<String, Object>> findAll() {
 		return null;
 	}
-	
+
 	@Override
 	public String generator() {
+
 		Object tableName = request.getParameter("tableName");
-		
-		if(tableName == null){
+
+		if (tableName == null) {
 			logger.error("请输入表名");
 			return "请输入表名";
 		}
-		Map<String,String> paramMap = new HashMap<>();
+		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("tableName", tableName.toString());
 		return tableService.generator(paramMap);
 	}
